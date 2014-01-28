@@ -1,0 +1,8 @@
+/bin
+/obj
+*.user
+*.suo
+/packages
+*.docx
+*.txt
+restore_packages.bat
