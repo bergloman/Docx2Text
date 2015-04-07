@@ -35,11 +35,14 @@ namespace Docx2Text {
                     var in_file = Path.GetFileName(file);
                     var in_file_full = Path.Combine(in_dir, in_file);
                     var out_file_full = Path.Combine(out_dir, in_file) + ".txt";
-
-                    using (var extractor = new DocxExtractor(in_file_full)) {
+                    try {
                         Console.WriteLine("Extracting file: " + in_file);
-                        var s = extractor.ReadWordDocument();
-                        File.WriteAllText(out_file_full, s, Encoding.UTF8);
+                        using (var extractor = new DocxExtractor(in_file_full)) {
+                            var s = extractor.ReadWordDocument();
+                            File.WriteAllText(out_file_full, s, Encoding.UTF8);
+                        }
+                    } catch (Exception ex) {
+                        Console.WriteLine("ERROR while extracting file: " + ex.ToString());
                     }
                 }
 
